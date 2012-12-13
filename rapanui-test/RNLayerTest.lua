@@ -11,6 +11,7 @@ require('MockLayer')
 require('MockMOAILayer2D')
 require('MockMOAISim')
 require('MockMOAIPartition')
+require('MockMOAIRenderMgr')
 
 --MOCK OBJECTS
 VIEWPORT = createViewport("viewport")
@@ -23,11 +24,13 @@ TEST_LAYER3 = createTestLayer("TEST_LAYER3",VIEWPORT,TEST_PARTITION)
 MOAILayer2D = createMockMOAILayer2D(TEST_LAYER,TEST_LAYER2,TEST_LAYER3)
 MOAISim = createMockMOAISim()
 MOAIPartition = createMockMOAIPartition(TEST_PARTITION)
+MOAIRenderMgr = createMockMOAIRenderMgr()
 
 local function init()
     MOAILayer2D:reset()
     MOAISim:reset()
     MOAIPartition:reset()
+    MOAIRenderMgr:reset()
     return RNLayer:new()
 end
 
@@ -57,10 +60,16 @@ function testThatViewportIsAddedToTheCreatedLayer()
     assert_that(TEST_LAYER.setViewportCalled,is(greater_than(0)))
 end
 
-function testThatCreatedLayerIsPushedToTheMOAISim()
+function testThatCreatedLayerIsNotPushedToTheMOAISim()
     local rnlayer = init()
     rnlayer:createLayer("test",VIEWPORT)
-    assert_that(MOAISim.pushRenderPassCalled,is(greater_than(0)))
+    assert_that(MOAISim.pushRenderPassCalled,is(equal_to(0)))
+end
+
+function testThatcreatingLayerCallsSetRenderTable()
+    local rnlayer = init()
+    rnlayer:createLayer("test",VIEWPORT)
+    assert_that(MOAIRenderMgr.setRenderTableCalled,is(equal_to(1)))
 end
 
 function testThatCreatedLayerIsFoundByName()
@@ -96,7 +105,7 @@ function testThatLayerCanBeCreatedWithPartition()
     local rnlayer = init()
     returnnedLayer,returnnedPartition = rnlayer:createLayerWithPartition("test",VIEWPORT)
     assert_that(MOAILayer2D.newCalled,is(greater_than(0)))
-    assert_that(MOAISim.pushRenderPassCalled,is(greater_than(0)))
+    assert_that(MOAIRenderMgr.setRenderTableCalled,is(equal_to(1)))
     assert_that(MOAIPartition.newCalled,is(greater_than(0)))
     assert_that(TEST_LAYER.setPartitionCalled ,is(greater_than(0)))
     assert_that(returnedLayer.name,is(equal_to(TEST_LAYER.name)))
@@ -175,6 +184,7 @@ function testThatLayerCanBeBroughtToFront()
     assert_true(layerDrawOrder[1] == layer2)
     assert_true(layerDrawOrder[2] == layer3)
     assert_true(layerDrawOrder[3] == layer1)
+    assert_that(MOAIRenderMgr.setRenderTableCalled,is(equal_to(4)))
 end
 
 function testThatLayerCanBeSendToBack()
@@ -182,11 +192,12 @@ function testThatLayerCanBeSendToBack()
     local layer1 = rnlayer:createLayer("test",VIEWPORT)
     local layer2 = rnlayer:createLayer("test2",VIEWPORT)
     local layer3 = rnlayer:createLayer("test3",VIEWPORT)
-    rnlayer:sendToBack(layer3) -- rendered last
+    rnlayer:sendToBack(layer3) -- rendered first
     local layerDrawOrder = rnlayer:createDrawOrder()
     assert_true(layerDrawOrder[1] == layer3)
     assert_true(layerDrawOrder[2] == layer1)
     assert_true(layerDrawOrder[3] == layer2)
+    assert_that(MOAIRenderMgr.setRenderTableCalled,is(equal_to(4)))
 end
 
 lunatest.run()

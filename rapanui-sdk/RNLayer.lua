@@ -39,8 +39,7 @@ function RNLayer:createLayer(name,viewport)
     self[index].layer = layer
     self[index].name = name
     layer:setViewport(viewport)
-    MOAISim.pushRenderPass(layer)
-
+    MOAIRenderMgr.setRenderTable(self:createDrawOrder())
     return layer
 end
 
@@ -103,6 +102,7 @@ function RNLayer:bringToFront(layer)
 
     table.remove(self,index)
     table.insert(self,size,layersContainer)
+    MOAIRenderMgr.setRenderTable(self:createDrawOrder())
 end
 
 function RNLayer:sendToBack(layer)
@@ -110,6 +110,7 @@ function RNLayer:sendToBack(layer)
 
     table.remove(self,index)
     table.insert(self,1,layersContainer)
+    MOAIRenderMgr.setRenderTable(self:createDrawOrder())
 end
 
 return RNLayer

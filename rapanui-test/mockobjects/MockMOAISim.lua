@@ -8,7 +8,7 @@ function createMockMOAISim()
  		openWindowCalled = 0
  	}
 
-	MockMOAISim.pushRenderPass = function(layer)
+	function MockMOAISim.pushRenderPass(layer)
 		assert_not_nil(layer)
 		MockMOAISim.pushRenderPassCalled = MOAISim.pushRenderPassCalled + 1
 	end
@@ -22,7 +22,7 @@ function createMockMOAISim()
 
 	function MockMOAISim:reset()
 		self.pushRenderPassCalled = 0
-		self.openWindowCalled = 0 
+		self.openWindowCalled = 0
 	end
 
 	return MockMOAISim

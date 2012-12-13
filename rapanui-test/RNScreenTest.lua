@@ -15,6 +15,7 @@ require('MockMOAILayer2D')
 require('MockMOAISim')
 require('MockMOAIViewport')
 require('MockMOAIPartition')
+require('MockMOAIRenderMgr')
 
 local MVC = MockConstants
 
@@ -35,6 +36,7 @@ MOAILayer2D = createMockMOAILayer2D(TEST_LAYER,TEST_LAYER2)
 MOAISim = createMockMOAISim()
 MOAIViewport = createMockMOAIViewport(VIEWPORT)
 MOAIPartition = createMockMOAIPartition(TEST_PARTITION)
+MOAIRenderMgr = createMockMOAIRenderMgr()
 
 --Initialization
 
@@ -50,6 +52,7 @@ local function init()
     MOAISim:reset()
     MOAIViewport:reset()
     MOAIPartition:reset()
+    MOAIRenderMgr:reset()
     
     return RNScreen:new()
 end
@@ -118,10 +121,16 @@ function testThatPartitionIsSetToLayer()
     assert_that(TEST_LAYER.setPartitionCalled,is(greater_than(0)))
 end
 
-function testThatLayerIsPushedToMoaiSim()
+function testThatLayerIsNotPushedToMoaiSim()
     local rnscreen = init()
     rnscreen:initWith(MockConstants.WIDTH, MockConstants.HEIGHT, MockConstants.SCREENWIDTH, MockConstants.SCREENHEIGHT)
-    assert_that(MOAISim.pushRenderPassCalled,is(greater_than(0)))
+    assert_that(MOAISim.pushRenderPassCalled,is(equal_to(0)))
+end
+
+function testThatSetRenderTableIsCalled()
+    local rnscreen = init()
+    rnscreen:initWith(MockConstants.WIDTH, MockConstants.HEIGHT, MockConstants.SCREENWIDTH, MockConstants.SCREENHEIGHT)
+    assert_that(MOAIRenderMgr.setRenderTableCalled,is(equal_to(1)))    
 end
 
 function testThatLayersAreStoredToScreen()
