@@ -17,9 +17,10 @@ VIEWPORT = createViewport("viewport")
 TEST_PARTITION = createPartition("TEST_PARTITION")
 TEST_LAYER = createTestLayer("TEST_LAYER",VIEWPORT,TEST_PARTITION)
 TEST_LAYER2 = createTestLayer("TEST_LAYER2",VIEWPORT,TEST_PARTITION)
+TEST_LAYER3 = createTestLayer("TEST_LAYER3",VIEWPORT,TEST_PARTITION)
 
 --Mocked MOIA classes
-MOAILayer2D = createMockMOAILayer2D(TEST_LAYER,TEST_LAYER2)
+MOAILayer2D = createMockMOAILayer2D(TEST_LAYER,TEST_LAYER2,TEST_LAYER3)
 MOAISim = createMockMOAISim()
 MOAIPartition = createMockMOAIPartition(TEST_PARTITION)
 
@@ -152,6 +153,28 @@ function testThatCreateDrawOrderReturnsAllLayers()
     local layerDrawOrder = rnlayer:createDrawOrder()
     assert_true(layerDrawOrder[1] == layer1)
     assert_true(layerDrawOrder[2] == layer2)
+end
+
+function testThatGetLayerContainerReturnsTheCorrectContainer()
+    local rnlayer = init()
+    local layer1 = rnlayer:createLayer("test",VIEWPORT)
+    local layer2 = rnlayer:createLayer("test2",VIEWPORT)
+    local layer3 = rnlayer:createLayer("test3",VIEWPORT)
+    local layerContainer,index = rnlayer:getLayerContainer(layer2)
+    assert_true(layerContainer.layer == layer2)    
+    assert_that(index,is(equal_to(2)))    
+end
+
+function testThatLayerCanBeBroughtToFront()
+    local rnlayer = init()
+    local layer1 = rnlayer:createLayer("test",VIEWPORT)
+    local layer2 = rnlayer:createLayer("test2",VIEWPORT)
+    local layer3 = rnlayer:createLayer("test3",VIEWPORT)
+    rnlayer:bringToFront(layer1) -- rendered last
+    local layerDrawOrder = rnlayer:createDrawOrder()
+    assert_true(layerDrawOrder[1] == layer2)
+    assert_true(layerDrawOrder[2] == layer3)
+    assert_true(layerDrawOrder[3] == layer1)
 end
 
 lunatest.run()

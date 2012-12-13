@@ -89,4 +89,20 @@ function RNLayer:createDrawOrder()
     return drawOrder
 end
 
+function RNLayer:getLayerContainer(layer)
+    for i, container in pairs(self) do
+        if container.layer == layer then
+            return container,i
+        end
+    end    
+end
+
+function RNLayer:bringToFront(layer)
+    local size = table.getn(self)
+    local layersContainer, index = self:getLayerContainer(layer)
+
+    table.remove(self,index)
+    table.insert(self,size,layersContainer)
+end
+
 return RNLayer
