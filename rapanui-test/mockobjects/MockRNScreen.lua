@@ -1,4 +1,4 @@
--- Author: Marko Pukari
+-- Author: niom
 -- Date: 12/2/12
 
 function createMockRNScreen()

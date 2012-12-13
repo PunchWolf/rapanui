@@ -1,3 +1,5 @@
+-- Author: niom
+-- Date: 11/30/12
 function createMockRNLayer(expectGetBytName)
 	
 	MockRNLayer = {

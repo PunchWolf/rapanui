@@ -1,4 +1,4 @@
--- Author: Marko Pukari
+-- Author: niom
 -- Date: 11/30/12
 
 require('MockConstants')
