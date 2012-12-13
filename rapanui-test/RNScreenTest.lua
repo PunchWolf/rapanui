@@ -100,7 +100,7 @@ end
 function testThatViewportIsSetToLayer() 
     local rnscreen = init()
     rnscreen:initWith(MockConstants.WIDTH, MockConstants.HEIGHT, MockConstants.SCREENWIDTH, MockConstants.SCREENHEIGHT)
-    assert_that(TEST_LAYER.setViewportCalled,is(greater_than(0)))   
+    assert_that(TEST_LAYER.setViewportCalled,is(equal_to(1)))   
 end
 
 function testThatNewPartitionIsCreated()
@@ -109,7 +109,7 @@ function testThatNewPartitionIsCreated()
     assert_that(MOAIPartition.newCalled,is(greater_than(0)))
 end
 
-function testThatNewPartitionIsSetToScreenMainPartitiob()
+function testThatNewPartitionIsSetToScreenMainPartition()
     local rnscreen = init()
     rnscreen:initWith(MockConstants.WIDTH, MockConstants.HEIGHT, MockConstants.SCREENWIDTH, MockConstants.SCREENHEIGHT)
     assert_that(rnscreen.mainPartition.name,is(equal_to(TEST_PARTITION.name)))
@@ -118,7 +118,7 @@ end
 function testThatPartitionIsSetToLayer()
     local rnscreen = init()
     rnscreen:initWith(MockConstants.WIDTH, MockConstants.HEIGHT, MockConstants.SCREENWIDTH, MockConstants.SCREENHEIGHT)
-    assert_that(TEST_LAYER.setPartitionCalled,is(greater_than(0)))
+    assert_that(TEST_LAYER.setPartitionCalled,is(equal_to(1)))
 end
 
 function testThatLayerIsNotPushedToMoaiSim()
