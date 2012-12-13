@@ -143,7 +143,15 @@ function testThatAllLayersAreDeletedAtOnce()
 
     rnlayer:removeAll()
     assert_that(table.getn(rnlayer),equal_to(0))
+end
 
+function testThatCreateDrawOrderReturnsAllLayers()
+    local rnlayer = init()
+    local layer1 = rnlayer:createLayer("test",VIEWPORT)
+    local layer2 = rnlayer:createLayer("test2",VIEWPORT)
+    local layerDrawOrder = rnlayer:createDrawOrder()
+    assert_true(layerDrawOrder[1] == layer1)
+    assert_true(layerDrawOrder[2] == layer2)
 end
 
 lunatest.run()

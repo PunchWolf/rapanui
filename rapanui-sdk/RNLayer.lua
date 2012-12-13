@@ -81,4 +81,12 @@ function RNLayer:clearContainer(container)
 	container.name = nil
 end
 
+function RNLayer:createDrawOrder()
+    local drawOrder = {}
+    for i, container in pairs(self) do
+        drawOrder[i] = container.layer
+    end
+    return drawOrder
+end
+
 return RNLayer
