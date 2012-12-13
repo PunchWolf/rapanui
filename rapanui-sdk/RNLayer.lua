@@ -105,4 +105,11 @@ function RNLayer:bringToFront(layer)
     table.insert(self,size,layersContainer)
 end
 
+function RNLayer:sendToBack(layer)
+    local layersContainer, index = self:getLayerContainer(layer)
+
+    table.remove(self,index)
+    table.insert(self,1,layersContainer)
+end
+
 return RNLayer

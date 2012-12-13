@@ -177,4 +177,16 @@ function testThatLayerCanBeBroughtToFront()
     assert_true(layerDrawOrder[3] == layer1)
 end
 
+function testThatLayerCanBeSendToBack()
+    local rnlayer = init()
+    local layer1 = rnlayer:createLayer("test",VIEWPORT)
+    local layer2 = rnlayer:createLayer("test2",VIEWPORT)
+    local layer3 = rnlayer:createLayer("test3",VIEWPORT)
+    rnlayer:sendToBack(layer3) -- rendered last
+    local layerDrawOrder = rnlayer:createDrawOrder()
+    assert_true(layerDrawOrder[1] == layer3)
+    assert_true(layerDrawOrder[2] == layer1)
+    assert_true(layerDrawOrder[3] == layer2)
+end
+
 lunatest.run()
