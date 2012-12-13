@@ -17,7 +17,7 @@
 -- variables to make our work easier
 local screen = RNFactory.screen
 local layers = screen.layers
-local mainlayer = layers:get(RNFactory.MAIN_LAYER)
+local mainlayer = layers:get(RNLayer.MAIN_LAYER)
 
 --create images
 local image1 = RNFactory.loadImage("images/image.png")
