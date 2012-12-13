@@ -26,11 +26,13 @@ local image2 = RNFactory.loadImage("images/image2.png")
 image2.x = 90
 
 --put them on screen
+-- This is equivalent to screen:putOnLayer(image1, mainlayer)
 screen:putOnLayer(image1)
 --or put them in a specified layer
 screen:putOnLayer(image2, mainlayer)
 
---we can also remove them from layer
+
+--we can also remove them from layer 
 --uncomment to check:
 --[[
 screen:removeFromLayer(image1)
