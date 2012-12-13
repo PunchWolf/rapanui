@@ -1,6 +1,9 @@
 -- Author: Marko Pukari
 -- Date: 11/30/12
 
+-- Author: niom
+-- Date: 11/30/12
+
 function createMockMOAISim()
 
  	local MockMOAISim = {

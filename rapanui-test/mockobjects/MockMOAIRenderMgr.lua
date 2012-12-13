@@ -1,3 +1,6 @@
+-- Author: niom
+-- Date: 12/13/12
+
 function createMockMOAIRenderMgr()
 
     local MockMOAIRenderMgr = {

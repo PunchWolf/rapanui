@@ -1,4 +1,4 @@
--- Author: Marko Pukari
+-- Author: niom
 -- Date: 12/2/12
 
 package.path = package.path .. ";../?.lua;lunatest/?.lua;mockobjects/?.lua;../rapanui-sdk/?.lua"
