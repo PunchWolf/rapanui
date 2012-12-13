@@ -200,4 +200,17 @@ function testThatLayerCanBeSendToBack()
     assert_that(MOAIRenderMgr.setRenderTableCalled,is(equal_to(4)))
 end
 
+function testThatLayerCanBePutOverOfOtherLayer()
+    local rnlayer = init()
+    local layer1 = rnlayer:createLayer("test",VIEWPORT)
+    local layer2 = rnlayer:createLayer("test2",VIEWPORT)
+    local layer3 = rnlayer:createLayer("test3",VIEWPORT)
+    rnlayer:putOver(layer1,layer2)
+    local layerDrawOrder = rnlayer:createDrawOrder()
+    assert_true(layerDrawOrder[1] == layer2)
+    assert_true(layerDrawOrder[2] == layer1)
+    assert_true(layerDrawOrder[3] == layer3)
+    assert_that(MOAIRenderMgr.setRenderTableCalled,is(equal_to(4)))
+end
+
 lunatest.run()

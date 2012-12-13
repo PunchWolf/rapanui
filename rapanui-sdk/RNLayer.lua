@@ -113,4 +113,12 @@ function RNLayer:sendToBack(layer)
     MOAIRenderMgr.setRenderTable(self:createDrawOrder())
 end
 
+function RNLayer:putOver(layerToMove,targetLayer)
+    local layersContainer, index = self:getLayerContainer(layerToMove)
+    table.remove(self,index)
+    local targetLayer, targetIndex = self:getLayerContainer(targetLayer)
+    table.insert(self,targetIndex + 1,layersContainer)
+    MOAIRenderMgr.setRenderTable(self:createDrawOrder())
+end
+
 return RNLayer
