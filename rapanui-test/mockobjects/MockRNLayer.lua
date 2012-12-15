@@ -13,7 +13,7 @@ function createMockRNLayer(expectGetBytName)
 	end
 	function MockRNLayer:get(name)
 		assert_that(name,is(equal_to(self.expectName)))
-		return createTestLayer("main",{},{})
+		return createTestLayer("main", {}, {})
 	end
 
 	return MockRNLayer

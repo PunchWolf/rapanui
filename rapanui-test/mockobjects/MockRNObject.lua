@@ -21,7 +21,7 @@ function createRNObject(name,prop)
 
 	function MockRNObject:initWithImage2(image)
 		self.initWithImage2Called = self.initWithImage2Called + 1
-		return self,{}
+		return self, {}
 
 	end
 
