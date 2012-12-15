@@ -22,12 +22,12 @@ RNLayer = {
 
 function RNLayer:new()
     local layers = {}
-    setmetatable(layers,self)
+    setmetatable(layers, self)
     self.__index = self
     return layers
 end
 
-function RNLayer:createLayer(name,viewport)
+function RNLayer:createLayer(name, viewport)
 	local layer = MOAILayer2D.new()
 	local index = table.getn(self) + 1
 	
@@ -44,18 +44,18 @@ function RNLayer:createLayer(name,viewport)
 end
 
 function RNLayer:get(name)
-    for i,container in pairs(self) do
+    for i, container in pairs(self) do
         if container.name == name then
             return container.layer
         end
     end
 end
 
-function RNLayer:createLayerWithPartition(name,viewport)
-    local layer = self:createLayer(name,viewport)
+function RNLayer:createLayerWithPartition(name, viewport)
+    local layer = self:createLayer(name, viewport)
     local partition = MOAIPartition.new()
     layer:setPartition(partition)
-    return layer,partition
+    return layer, partition
 end
 
 function RNLayer:remove(layer)
@@ -91,7 +91,7 @@ end
 function RNLayer:getLayerContainer(layer)
     for i, container in pairs(self) do
         if container.layer == layer then
-            return container,i
+            return container, i
         end
     end    
 end
@@ -100,24 +100,24 @@ function RNLayer:bringToFront(layer)
     local size = table.getn(self)
     local layersContainer, index = self:getLayerContainer(layer)
 
-    table.remove(self,index)
-    table.insert(self,size,layersContainer)
+    table.remove(self, index)
+    table.insert(self, size, layersContainer)
     MOAIRenderMgr.setRenderTable(self:createDrawOrder())
 end
 
 function RNLayer:sendToBack(layer)
     local layersContainer, index = self:getLayerContainer(layer)
 
-    table.remove(self,index)
-    table.insert(self,1,layersContainer)
+    table.remove(self, index)
+    table.insert(self, 1, layersContainer)
     MOAIRenderMgr.setRenderTable(self:createDrawOrder())
 end
 
-function RNLayer:putOver(layerToMove,targetLayer)
+function RNLayer:putOver(layerToMove, targetLayer)
     local layersContainer, index = self:getLayerContainer(layerToMove)
-    table.remove(self,index)
+    table.remove(self, index)
     local targetLayer, targetIndex = self:getLayerContainer(targetLayer)
-    table.insert(self,targetIndex + 1,layersContainer)
+    table.insert(self, targetIndex + 1, layersContainer)
     MOAIRenderMgr.setRenderTable(self:createDrawOrder())
 end
 

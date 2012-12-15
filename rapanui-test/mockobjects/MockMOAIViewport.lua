@@ -6,7 +6,7 @@ function createMockMOAIViewport(viewport)
 	MockMOAIViewport = {
 		newCalled = 0,
 		VIEWPORT = viewport,
-		name="testViewport"
+		name = "testViewport"
 	}
 	
 	MockMOAIViewport.new = function()

@@ -5,7 +5,7 @@ function createMockMOAILayer2D(...)
 
  	local MockMOAILayer2D = {
  		newCalled = 0,
- 		i=0,
+ 		i = 0,
  		layers = arg
  	}
 	
@@ -17,7 +17,7 @@ function createMockMOAILayer2D(...)
 
 	function MockMOAILayer2D:reset()
 		self.newCalled = 0;
-		self.i=0
+		self.i = 0
 	end
 
 	return MockMOAILayer2D
