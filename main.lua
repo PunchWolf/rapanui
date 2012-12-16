@@ -51,7 +51,7 @@ end      --]]
 --require("rapanui-samples/lists/rn-rnListView")
 --require("rapanui-samples/lists/rn-rnListView-multilist")
 --require("rapanui-samples/lists/rn-rnPageSwipe")
-require("rapanui-samples/lists/rn-rnPageSwipe-multiswipe")
+--require("rapanui-samples/lists/rn-rnPageSwipe-multiswipe")
 
 -- Menu
 --require("rapanui-samples/menu/rn-menu-director")
@@ -106,7 +106,8 @@ require("rapanui-samples/lists/rn-rnPageSwipe-multiswipe")
 
 -- Layers
 --require("rapanui-samples/layers/rn-layers-multilayerHud")
---require("rapanui-samples/layers/rn-layers-putOnLayer")
+require("rapanui-samples/layers/rn-layers-putOnLayer")
+--require("rapanui-samples/layers/rn-layers-parallax")
 
 
 -- Transition on RNButton
